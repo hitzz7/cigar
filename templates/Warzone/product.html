@@ -19,7 +19,7 @@
             {% endfor %}
           </div>
           <p class="card-title">{{ product.title }}</p>
-          <span class="card-price">Rs. {{ product.price }}</span>
+          {% comment %} <span class="card-price">Rs. {{ product.price }}</span> {% endcomment %}
         </div>
       </a>
     {% empty %}
