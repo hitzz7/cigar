@@ -5,141 +5,624 @@
 
 {% block content %}
 <div class="bg-image">
-    <video  autoplay muted loop>
-        <source src="{% static 'br.mp4' %}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    
+        <img src="{% static 'cigbg.jpg' %}" alt="image">
+        
+    
     <div class="text-overlay">
-        <h1>Baskin Robbins Nepal</h1>
-        <p>Is Here For Your Happiness</p>
-        <button class="button">View Different Flavours</button>
+        <div class="google-review">
+            <span class="rating-text">Excellent 4.5 out of 5</span>
+            <span class="stars">
+            <i class="fas fa-star"></i>
+            
+            </span>
+            
+        </div>
+        <h1>Smoke Syndicate</h1>
+        <p>Nepal’s Finest Cigar Collection</p>
+        <button class="button"><a href="{% url 'store:product' %}">Shop Now</a></button>
+
+        <div class="sales-label">1000+ Products Sold</div>
         
     </div>
     <div class="social-media">
-        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        
     </div>
-    <div class="image-overlay">
-        <img src="{% static 'icelogo.png' %}" alt="Ice Cream Logo">
-    </div>
+    
 
     
    
 </div>
+<section class="brand-logos">
+  <h2 class="brand-title">Cuban Cigars</h2>
+  <div class="logo-track">
+    <img src="{% static "cobra.png"%}" alt="Brand 1">
+    <img src="{% static "rr.png"%}" alt="Brand 2" style="transform: scale(1.5); ">
+    <img src="{% static "JosePiedra.jpg"%}" alt="Brand 2" style="transform: scale(1.2);">
+    <img src="{% static "cobra.png"%}" alt="Brand 1">
+    <img src="{% static "rr.png"%}" alt="Brand 2" style="transform: scale(1.5); ">
+    <img src="{% static "JosePiedra.jpg"%}" alt="Brand 2" style="transform: scale(1.2);">
+    <img src="{% static "cobra.png"%}" alt="Brand 1">
+    <img src="{% static "rr.png"%}" alt="Brand 2" style="transform: scale(1.5); ">
+    <img src="{% static "JosePiedra.jpg"%}" alt="Brand 2" style="transform: scale(1.2);">
 
+  </div>
+</section>
+
+
+<section class="gallery-section">
+  <h2 class="gallery-heading">Best Selling</h2>
+
+  <div class="gallery-wrapper">
+    {% for product in products %}
+    <a href="{% url 'store:product_detail' product.id %}">
     
-<div class="products-section" style="margin-top:50px">
-    <h2>IceCreams</h2>
-    <p style="color:#F05098;">best selling icecreams</p>
-
-    <div class="products-grid">
-        {% for product in products %}
-        <a href=8">
-        <div class="card">
-            <div class="image">
-                {% for image in product.images.all %}
+      <div class="card-wrapper">
+        <div class="card-1">
+          {% for image in product.images.all %}
                     {% if image.is_feature %}
                         
                             <img src="{{ image.image.url }}" alt="{{ product.title }} Featured Image">
                         
                     {% endif %}
-                {% endfor %}
-            </div>
-            <span class="title">{{ product.title }}</span>
-            <span class="price">RS {{ product.price }}</span>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
-    <button class="cta-button">View all Flavours</button>
-</div>
-<div class="services-section">
-    
-    <div class="service-box">
-        <img src="{% static 'brblue.jpg' %}" alt="Service Image" class="service-image">
-        <div class="service-text">
-            <h3>Cotton Candy</h3>
-            <p>
-                Baskin-Robbins Cotton Candy ice cream is a fan-favorite flavor that brings the nostalgic taste of classic carnival cotton candy into a creamy frozen treat. It features a swirl of pink and blue cotton candy-flavored ice cream, creating a fun, colorful, and sweet experience with every scoop.
-            </p>
-            <p>RS 500</p>
-            <button class="cta-button">Add to Cart</button>
-        </div>
-    </div>
-    <h2>Shop By Category</h2>
-    <h7>variety of icecream available</h7>
-    
-    <div class="service-cards">
-        <div class="cardd">
-            <img src="{% static 'icea.jpg' %}" alt="Maintenance Image" class="card-image">
-            <div class="overlay">
-                <h4>Scoops</h4>
-            </div>
-        </div>
-        <div class="cardd">
-            <img src="{% static 'iceb.jpg' %}" alt="Maintenance Image" class="card-image">
-            <div class="overlay">
-                <h4>Bars</h4>
-            </div>
-        </div>
-        <div class="cardd">
-            <img src="{% static 'icec.jpg' %}" alt="Maintenance Image" class="card-image">
-            <div class="overlay">
-                <h4>cones</h4>
-            </div>
-        </div>
+        <p class="card-title">{{product.title}}</p>
+        <span class="card-price">{{product.price}}</span>
+    {% endfor %}
     </div>
     
     
-</div>
+    
+    
+    
+    
+  </div>
+  <button class="button1">explore more</button>
+</section>
 
-<div class="work-section">
-    <h2>Cafes</h2>
-    <h3>Baskin Robbins City Mall Cafe<h3>
-    <div class="projects-grid">
-        
-        <div class="project-card">
-            <div class="image">
-                
-                    
-                        
-                            <img src="{% static 'bbmall.jpg' %}" alt="image">
-                        
-                    
-                
+
+
+<section class="three-images">
+  <div class="image-row">
+
+    <!-- Non-Cuban -->
+    <div class="image-box">
+      <a href="{% url 'store:product_list' 2 %}">
+        <img src="{% static 'cuban.jpg' %}" alt="Image 1">
+        <div class="overlay-text">Non-Cuban</div>
+      </a>
+    </div>
+
+    <!-- Cuban -->
+    <div class="image-box">
+      <a href="{% url 'store:product_list' 1 %}">
+        <img src="{% static 'noncuban.jpg' %}" alt="Image 2">
+        <div class="overlay-text">Cuban</div>
+      </a>
+    </div>
+
+    <!-- Accessories -->
+    <div class="image-box">
+      <a href="{% url 'store:product_list' 3 %}">
+        <img src="{% static 'light.jpg' %}" alt="Image 3">
+        <div class="overlay-text">Accessories</div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<section class="gallery-section">
+  <h2 class="gallery-heading">Cuban</h2>
+  <div class="gallery-wrapper">
+    {% for product in cuban_products %}
+      <a href="{% url 'store:product_detail' product.id %}">
+        <div class="card-wrapper">
+          <div class="card-1">
+            {% for image in product.images.all %}
+              {% if image.is_feature %}
+                <img src="{{ image.image.url }}" alt="{{ product.title }} Featured Image">
+              {% endif %}
+            {% endfor %}
+          </div>
+          <p class="card-title">{{ product.title }}</p>
+          {% comment %} <span class="card-price">Rs. {{ product.price }}</span> {% endcomment %}
+        </div>
+      </a>
+    {% empty %}
+      <p>No Cuban products available.</p>
+    {% endfor %}
+  </div>
+  <a href="{% url 'store:product_list' 2 %}">
+    <button class="button1">explore more</button>
+</a>
+</section>
+
+{% comment %} <section class="brands-section">
+    
+    <div class="logo-strip">
+        <h2 class="brands-heading">Brands That Worked With Us</h2>
+        <div class="logo-track">
+            <img src="{% static 'bb.png' %}" alt="Logo 1">
+            <img src="{% static 'bb.png' %}" alt="Logo 2">
+            <img src="{% static 'bb.png' %}" alt="Logo 3">
+            <img src="{% static 'bb.png' %}" alt="Logo 4">
+            <img src="{% static 'bb.png' %}" alt="Logo 5">
+            <!-- Repeat logos for continuous scroll -->
+            <img src="{% static 'bb.png' %}" alt="Logo 1 copy">
+            <img src="{% static 'bb.png' %}" alt="Logo 2 copy">
+        </div>
+    </div>
+</section> {% endcomment %}
+{% comment %} 
+<section class="signs-section">
+    <h2 class="section-heading">Shop By Category</h2>
+
+    <div class="carousel-container">
+        <button class="carousel-btn prev" id="prevBtn">&#10094;</button>
+
+        <div class="carousel-track" id="carouselTrack">
+            <div class="card">
+                <img src="{% static 'maay7.jpg' %}"lo ading="lazy" alt="Sign 1">
+                <div class="overlay">Lamp</div>
+            </div>
+            <div class="card">
+                <img src="{% static 'maya3.jpg' %}" loading="lazy" alt="Sign 2">
+                <div class="overlay">Furniture</div>
+            </div>
+            <div class="card">
+                <img src="{% static 'maya4.jpg' %}"  loading="lazy" alt="Sign 3">
+                <div class="overlay">Beds</div>
+            </div>
+            <div class="card">
+                <img src="{% static 'maya5.jpg' %}" loading="lazy" alt="Sign 4">
+                <div class="overlay">Wall Art</div>
+            </div>
+            <div class="card">
+                <img src="{% static 'sin8.jpg' %}" loading="lazy" alt="Sign 4">
+                <div class="overlay">hanging Sign</div>
+            </div>
+            <div class="card">
+                <img src="{% static 'sin6.jpg' %}" loading="lazy" alt="Sign 4">
+                <div class="overlay">Custom Wall Art</div>
             </div>
             
+            <!-- Add more cards as needed -->
         </div>
-        <p>BR Cafe is a cozy and vibrant space where indulgence meets relaxation. Known for its unique blend of premium coffees and world-renowned ice creams, BR Cafe offers a warm, inviting atmosphere perfect for friends, families, or a quiet solo retreat. </p>
-        
+
+        <button class="carousel-btn next" id="nextBtn">&#10095;</button>
     </div>
-    <button class="cta-button">More Cafes</button>
-</div>
-<h2 style="text-align:center;">About Us</h2>
+</section>
+
+<section class="image-overlay-section">
+  <div class="image-card">
+    <img src="{% static 'maya3.jpg' %}" alt="Living Room" loading="lazy">
+    <div class="overlay-text1">
+      <h3>Living Room</h3>
+      <p>Modern & Cozy</p>
+    </div>
+  </div>
+  
+  <div class="image-card">
+    <img src="{% static 'maya5.jpg' %}" alt="Bedroom" loading="lazy">
+    <div class="overlay-text1">
+      <h3>Bedroom</h3>
+      <p>Minimalist Style</p>
+    </div>
+  </div>
+  
+  <div class="image-card">
+    <img src="{% static 'maya4.jpg' %}" alt="Workspace" loading="lazy">
+    <div class="overlay-text1">
+      <h3>Workspace</h3>
+      <p>Productive & Sleek</p>
+    </div>
+  </div>
+</section> {% endcomment %}
+
+{% comment %} <section class="features-section">
+    <div class="feature">
+      <img src="{% static 'web-design.png' %}"  loading="lazy" alt="Custom Designed">
+      <div class="text">
+        <h3>Custom Designed</h3>
+        <p>Each LED neon sign or artwork is designed in-house by our professional designers.</p>
+      </div>
+    </div>
+  
+    <div class="feature">
+      <img src="{% static 'renewable-energy.png' %}" alt="Energy Efficient">
+      <div class="text">
+        <h3>Energy & Cost Efficient</h3>
+        <p>Low energy consumption, 100,000+ hour lifespan, no heat or noise.</p>
+      </div>
+    </div>
+  
+    <div class="feature">
+      <img src="{% static 'muscle.png' %}" alt="Durable">
+      <div class="text">
+        <h3>Durable</h3>
+        <p>Latest neon flex technology which is stronger & lighter than glass neon tubes.</p>
+      </div>
+    </div>
+  
+    <div class="feature">
+      <img src="{% static 'installation.png' %}" alt="Easy to Install">
+      <div class="text">
+        <h3>Easy to Install</h3>
+        <p>Our high quality backboards feature pre-drilled holes for easy wall mounting & hanging.</p>
+      </div>
+    </div>
+  </section> {% endcomment %}
+
+
+
+
+    <section class="image-overlay-section">
+  <div class="overlay-container">
+    <img src="{% static 'cigbg1.jpg' %}" alt="Background" class="background-image">
+    <div class="overlay-text">
+      <h2>Discover the Art of Fine Cigars</h2>
+      <p>Indulge in the rich tradition of handcrafted cigars, where every draw tells a story of heritage, craftsmanship, and timeless taste.</p>
+      <a href="#" class="btn">Shop Now</a>
+    </div>
+  </div>
+</section>
+<section class="gallery-section">
+  <h2 class="gallery-heading">Accessories</h2>
+  <div class="gallery-wrapper">
+    {% for product in accessories_products %}
+      <a href="{% url 'store:product_detail' product.id %}">
+        <div class="card-wrapper">
+          <div class="card-1">
+            {% for image in product.images.all %}
+              {% if image.is_feature %}
+                <img src="{{ image.image.url }}" alt="{{ product.title }} Featured Image">
+              {% endif %}
+            {% endfor %}
+          </div>
+          <p class="card-title">{{ product.title }}</p>
+          {% comment %} <span class="card-price">Rs. {{ product.price }}</span> {% endcomment %}
+        </div>
+      </a>
+    {% empty %}
+      <p>No accessories available.</p>
+    {% endfor %}
+  </div>
+  <a href="{% url 'store:product_list' 3 %}">
+    <button class="button1">explore more</button>
+</a>
+</section>
+
+<section class="partners-section">
+    <h2 class="partners-heading">Our Partners</h2>
+
+    <div class="partners-wrapper">
+        <div class="partner-logo">
+            <img src="{% static 'rr.png' %}" alt="Partner 1">
+        </div>
+
+        <div class="partner-logo">
+            <img src="{% static 'cobra.png' %}" alt="Partner 2">
+        </div>
+
+        <div class="partner-logo">
+            <img src="{% static 'JosePiedra.jpg' %}" alt="Partner 3">
+        </div>
+
+        <div class="partner-logo">
+            <img src="{% static 'cobra.png' %}" alt="Partner 4">
+        </div>
+    </div>
+</section>
+
+
 <div class="about-section">
     
     <div class="about-box">
         <div class="about-text">
-            <h2>Baskin Robins</h2>
+            <h2>When it comes to cigars, we redefined the experience.</h2>
+            <p>
+                 At Smoke Syndicate, we provide the best quality cigars, ensuring every piece reflects excellence and authenticity for true cigar lovers.
+            </p>
+            
+            <button class="button">More about us</button>
+        </div>
+        <img src="{% static 'cigbg2.jpg' %}"  loading="lazy" alt="Service Image" class="about-image">
+        
+    </div>
+    
+    <div id="popup-ad" class="popup-ad">
+    <div class="popup-content">
+
+        <!-- Close Button -->
+        <button id="close-popup" class="close-btn">&times;</button>
+
+        <!-- Ad Image Here -->
+        <img src="{% static 'cigbg1.jpg' %}" alt="Ad Poster">
+    </div>
+</div>
+    
+</div>
+{% comment %} 
+<div class="products-section" style="margin-top:50px">
+  <h2>Top Selling</h2>
+
+  <div class="products-grid">
+    <!-- Product 1 -->
+    <div class="card1">
+      <div class="image">
+        <img src="{% static 'maya3.jpg' %}" alt="Product 1">
+      </div>
+      <span class="title">Mirror</span>
+      <span class="price">RS 1500</span>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="card1">
+      <div class="image">
+        <img src="{% static 'l1.jpg' %}" alt="Product 2">
+      </div>
+      <span class="title">Product Two</span>
+      <span class="price">RS 2200</span>
+    </div>
+
+    <div class="card1">
+      <div class="image">
+        <img src="{% static 'maya10.jpg' %}" alt="Product 2">
+      </div>
+      <span class="title">Product Two</span>
+      <span class="price">RS 2200</span>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="card1">
+      <div class="image">
+        <img src="{% static 'maya3.jpg' %}" alt="Product 3">
+      </div>
+      <span class="title">Product Three</span>
+      <span class="price">RS 1800</span>
+    </div>
+
+    <!-- Add more products as needed -->
+  </div>
+
+  <button class="button">View all</button>
+</div> {% endcomment %}
+
+
+{% comment %} <section class="new-arrival">
+  <h2 class="section-title">New Arrivals</h2>
+  <div class="arrival-grid">
+    <!-- First Set -->
+    <div class="small-img"><img src="{% static 'maya3.jpg' %}" alt="Product 1"></div>
+    <div class="small-img"><img src="{% static 'maya4.jpg' %}" alt="Product 2"></div>
+    <div class="big-img"><img src="{% static 'maya6.jpg' %}" alt="Product 3"></div>
+
+    <div class="center-text">
+  <h3>Curated for Modern Living</h3>
+  <h3>Fresh Designs. Timeless Appeal.</h3>
+  <h3>Style That Speaks Your Story</h3>
+  <h3>New Arrivals That Inspire</h3>
+</div>
+    <!-- Second Set -->
+    <div class="big-img lift-up"><img src="{% static 'maay7.jpg' %}" alt="Product 4"></div>
+    <div class="small-img"><img src="{% static 'l1.jpg' %}" alt="Product 5"></div>
+    <div class="small-img"><img src="{% static 'maya7.jpg' %}" alt="Product 6"></div>
+  </div>
+</section>
+
+
+
+<section class="gallery-section">
+  <h2 class="gallery-heading">Explore More</h2>
+
+  <div class="gallery-wrapper">
+    <div class="card-wrapper">
+      <div class="card-1">
+        <img src="{% static 'e1.jpg' %}" loading="lazy" alt="2D Acrylic Sign">
+      </div>
+      <p class="card-title">Furniture and sofas</p>
+      <span class="card-price">Rs. 15,000</span>
+    </div>
+    
+    <div class="card-wrapper">
+      <div class="card-1">
+        <img src="{% static 'e2.jpg' %}" loading="lazy" alt="3D LED Sign">
+      </div>
+      <p class="card-title">Study space</p>
+      <span class="card-price">Rs. 8,500</span>
+    </div>
+    
+    <div class="card-wrapper">
+      <div class="card-1">
+        <img src="{% static 'maya1.jpg' %}" loading="lazy" alt="Neon Sign">
+      </div>
+      <p class="card-title">Room Decors</p>
+      <span class="card-price">Rs. 3,200</span>
+    </div>
+    
+    <div class="card-wrapper">
+      <div class="card-1">
+        <img src="{% static 'maya4.jpg' %}" loading="lazy" alt="Metal Cut Letter">
+      </div>
+      <p class="card-title">Bedroom essentials</p>
+      <span class="card-price">Rs. 12,000</span>
+    </div>
+  </div>
+</section> {% endcomment %}
+
+
+{% comment %} <section class="stats-section">
+  <div class="stats-wrapper">
+
+    <div class="stat-box">
+      <img src="{% static 'verification.png' %}" alt="Projects Completed">
+      <div class="stat-content">
+        <h3 class="counter" data-target="+250">0</h3>
+        <p>Projects Completed</p>
+      </div>
+    </div>
+
+    <div class="stat-box">
+      <img src="{% static 'people.png' %}" alt="Team Members">
+      <div class="stat-content">
+        <h3 class="counter" data-target="20">0</h3>
+        <p>Team Members</p>
+      </div>
+    </div>
+
+    <div class="stat-box">
+      <img src="{% static 'quality.png' %}" alt="Years on Market">
+      <div class="stat-content">
+        <h3 class="counter" data-target="10">0</h3>
+        <p>Years on Market</p>
+      </div>
+    </div>
+
+  </div>
+  <button class="button">View more Images</button> 
+</section>
+<section class="logo-upload-section">
+  <div class="logo-upload-container">
+    <!-- Text & Upload Button -->
+    <div class="logo-upload-text">
+      <h2>Place Your Logo</h2>
+      <p>Visualize your brand logo on our signs in real-time. Upload your logo and preview instantly.</p>
+      
+      <label for="logoInput" class="upload-label">
+        <i class="fas fa-upload"></i> Upload Your Logo
+      </label>
+      <input type="file" id="logoInput" accept="image/*" hidden>
+    </div>
+
+    <!-- Preview Image -->
+    
+</section>
+
+<section class="testimonial-section">
+  <h2 class="section-title">What Our Clients Say</h2>
+
+  <div class="testimonial-container">
+    <div class="testimonial-card">
+      <img src="{% static 'bb.png'%}" alt="Client Photo" class="client-photo" />
+      <h3 class="client-name">Jane Doe</h3>
+      <p class="client-quote">"Amazing service! They exceeded my expectations and delivered on time."</p>
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="{% static 'bb.png'%}" alt="Client Photo" class="client-photo" />
+      <h3 class="client-name">John Smith</h3>
+      <p class="client-quote">"Professional and reliable. Highly recommend to anyone looking for quality work."</p>
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="{% static 'bb.png'%}" alt="Client Photo" class="client-photo" />
+      <h3 class="client-name">Emily Rose</h3>
+      <p class="client-quote">"Great communication and outstanding results. Will work with them again!"</p>
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <img src="{% static 'bb.png'%}" alt="Client Photo" class="client-photo" />
+      <h3 class="client-name">Emily Rose</h3>
+      <p class="client-quote">"Great communication and outstanding results. Will work with them again!"</p>
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+{% endcomment %}
+
+{% comment %} 
+<div class="about-section" style="margin-bottom:80px;">
+    
+    <div class="about-box">
+        <div class="about-text">
+            <h2>About US</h2>
             <p>
                 Baskin-Robbins Cotton Candy ice cream is a fan-favorite flavor that brings the nostalgic taste of classic carnival cotton candy into a creamy frozen treat. It features a swirl of pink and blue cotton candy-flavored ice cream, creating a fun, colorful, and sweet experience with every scoop.
             </p>
             
-            <button class="cta-button">Add to Cart</button>
+            <button class="button">More About Us</button>
         </div>
-        <img src="{% static 'bsabot.png' %}" alt="Service Image" class="about-image">
+        <img src="{% static 'sin8.jpg' %}" alt="Service Image" class="about-image">
         
     </div>
     
     
     
-</div>
+</div>  {% endcomment %}
 
 
 
 
-<h6>Baskin </h6>
-<h5> Robbins</h5>
+<script>
+    const track = document.getElementById('carouselTrack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let scrollAmount = 0;
+
+    // Adjust this based on actual .card width + gap in pixels
+    const cardWidth = 460; // 400px width + 60px gap
+    const visibleCards = 4;
+    const totalCards = track.querySelectorAll('.card').length;
+    const maxScroll = (totalCards - visibleCards) * cardWidth;
+
+    nextBtn.addEventListener('click', () => {
+        if (scrollAmount < maxScroll) {
+            scrollAmount += cardWidth * visibleCards;
+            if (scrollAmount > maxScroll) scrollAmount = maxScroll;
+            track.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (scrollAmount > 0) {
+            scrollAmount -= cardWidth * visibleCards;
+            if (scrollAmount < 0) scrollAmount = 0;
+            track.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+        }
+    });
+</script>
+
+
+<script>
+  const logoInput = document.getElementById("logoInput");
+  const logoPreview = document.getElementById("logoPreview");
+  const previewContainer = document.getElementById("logoPreviewContainer");
+
+  logoInput.addEventListener("change", function () {
+    const file = logoInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        logoPreview.src = e.target.result;
+        previewContainer.classList.remove("hidden");
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+
+
+
+
 
 {% endblock %}

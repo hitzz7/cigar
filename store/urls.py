@@ -10,14 +10,14 @@ urlpatterns = [
     
     path('product_list/<int:category_id>/', views.product_list, name='product_list'),
     path('product_detail/<int:product_id>/', views.product_detail, name='product_detail'),
-    path('project_detail/<int:project_id>/', views.project_detail, name='project_detail'),
-     path('services/', views.services, name='services'),
-       path('about/', views.about, name='about'),
-       path('work/', views.project, name='work'),
-         path('contact/', views.contact, name='contact'),
-        #  path('start /', views.start, name='start'),
-         path('contactc/', views.contactc, name='contactc'),
+    path("cart-items-json/", views.cart_items_json, name="cart_items_json"),
+     path("update-cart-ajax/<int:variant_id>/", views.update_cart_ajax, name="update_cart_ajax"),
+      path("remove-from-cart-ajax/<int:variant_id>/", views.remove_from_cart_ajax, name="remove_from_cart_ajax"),
+    path('add-to-cart/<int:variant_id>/', views.add_to_cart, name='add_to_cart'),
     path('success/', views.success, name='success'),
+    path("checkout/", views.checkout, name="checkout"),
+    path('get-delivery-charge/', views.get_delivery_charge, name='get_delivery_charge'),
+    
     
 ]
 

@@ -4,25 +4,34 @@
 {% block title %}Our Products{% endblock %}
 
 {% block content %}
-<div class="products-section" style="margin-top:50px">
-    <h2>Our Products</h2>
-    <div class="products-grid">
-        {% for product in products %}
-        <a href="{% url 'store:product_detail' product.id %}">
-        <div class="card">
-            <div class="image">
-                {% for image in product.images.all %}
+<section class="gallery-section">
+  <h2 class="gallery-heading">Best Selling</h2>
+    
+  <div class="gallery-wrapper">
+    {% for product in products %}
+    <a href="{% url 'store:product_detail' product.id %}">
+    
+      <div class="card-wrapper">
+        <div class="card-1">
+          {% for image in product.images.all %}
                     {% if image.is_feature %}
                         
                             <img src="{{ image.image.url }}" alt="{{ product.title }} Featured Image">
                         
                     {% endif %}
-                {% endfor %}
-            </div>
-            <span class="title">{{ product.title }}</span>
-            <span class="price">RS {{ product.price }}</span>
+            {% endfor %}
         </div>
-        {% endfor %}
+        <p class="card-title">{{product.title}}</p>
+        <span class="card-price">{{product.price}}</span>
+    {% endfor %}
     </div>
-</div>
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</section>
 {% endblock %}

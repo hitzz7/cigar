@@ -2,235 +2,313 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baskin Robbins</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Smoke Syndicate</title>
 
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" type="image/png" href="{% static 'smokelogo.jpg' %}">
 
+    <!-- Styles -->
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
 </head>
 <body>
+
+    <!-- Discount Banner -->
     <div class="discount-banner">
-        <div class="banner-message">Welcome to Baskin Robbins</div>
-        <div class="banner-message">15 percent discount on all products</div>
-        
-        <div class="banner-message">Your Summer is here</div>
+        <div class="banner-message">Welcome to Your Smoke Syndicate </div>
+        <div class="banner-message">Premium</div>
+        <div class="banner-message">Free delivery</div>
     </div>
+
+    <!-- Header -->
     <header class="header">
+        <div class="logo">
+            <a href="{% url 'store:home' %}">
+                <img src="{% static 'smokelogo.jpg' %}" alt="Logo" >
+            </a>
+        </div>
         
         <nav>
             <ul class="navbar" id="navbar">
-                <li><a href="{% url 'store:product' %}">Icecream</a></li>
-                
-                <li><a href="">Cafes</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Contact</a></li>
-                
+                {% for category in categories %}
+                    <li>
+                        <a href="{% url 'store:product_list' category.id %}">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+                <li><a href="{% url 'store:product' %}">All</a></li>
             </ul>
         </nav>
-        <div class="logo">
-            <a href="{% url 'store:home'%}">
-                <img src="{% static 'logo.png'%}">
-            </a>
+        <div class="icons">
             
+            
+            
+            <a href="#"><i class="fas fa-search"></i></a>
+            <a href="#" id="cart-icon"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+        <!-- Hamburger Menu for Mobile -->
+<div class="hamburger" id="hamburger">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+
+<!-- Drawer menu -->
+<div class="drawer" id="drawer">
+    <ul>
+        <li><a href="{% url 'store:home' %}">Home</a></li>
+        <li><a href="{% url 'store:product' %}">Products</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+    </ul>
+</div>
+
+<!-- Overlay -->
+<div class="overlay1" id="overlay"></div>
+
+
+
+        {% comment %} <div class="icons">
+            
+            <a href="#" id="menuBtn"><i class="fas fa-bars"></i></a>
+        </div>
+        <div class="drawer" id="drawer">
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+                
+            </ul>
         </div>
 
-        <div class="icons">
-            <a href="#"><i class="fa fa-search"></i></a>
-            <a href="#"><i class="fa fa-shopping-basket"></i></a>
-            <a href="#"><i class="fa fa-heart"></i></a>
-        </div>
-        
-        <div class="hamburger" id="hamburger" >
+        <div class="overlay1" id="overlay"></div>
+
+        <div class="hamburger" id="hamburger">
             <div></div>
             <div></div>
             <div></div>
-        </div>
+        </div> {% endcomment %}
     </header>
+    <div id="cart-drawer" class="cart-drawer">
+    <div class="cart-header">
+        <h2>Your Cart</h2>
+        <span id="close-cart" style="cursor:pointer;">&times;</span>
+    </div>
+    <div class="cart-items">
+        <!-- Items will be dynamically added here -->
+    </div>
+    <div class="cart-footer">
+        <div class="cart-total">Total: Rs <span id="cart-total">0</span></div>
+        <a href="{% url 'store:checkout'%}" class="checkout-btn">Checkout</a>
+    </div>
+</div>
+<!-- Popup Ad Container -->
+
+
+
+    <!-- Main Content -->
     <main>
         {% block content %}
-        <!-- Page-specific content goes here -->
+        <!-- Page-specific content -->
         {% endblock %}
     </main>
 
-    
-    
+    <!-- Footer -->
     <footer class="footer">
         <div class="row">
-            <!-- Logo Section -->
             <div class="col">
-                <img src="{% static 'logo.png' %}" alt="Itronz Logo" class="footer-logo">
-                <p>Is here for your happiness</p>
+                <img src="{% static 'smokelogo.jpg' %}" alt="Logo" class="footer-logo">
+                <p>Smoke like king</p>
             </div>
-            
-            <!-- Contact Information -->
             <div class="col">
                 <h4>Office<div class="underline"><span></span></div></h4>
-                <p>Phone: +977-9812345678</p>
-                <p>Email: info@itronz.net</p>
-                <p>Kathmandu, Nepal</p>
+                <p>Phone:9818326491</p>
+                <p>Email: website@hitzz.co</p>
+                <p>Lalitpur, Nepal</p>
             </div>
             <div class="col">
-                <h4>links<div class="underline"><span></span></div></h4>
-                <p href="">home</p>
-                <p href="">Icecreams</p>
-                <p href="">Cafes</p>
-                <p href="">about</p>
-                
+                <h4>Links<div class="underline"><span></span></div></h4>
+                <p><a href="#">Home</a></p>
+                <p><a href="#">Signs</a></p>
+                <p><a href="#">Services</a></p>
+                <p><a href="#">About</a></p>
             </div>
             <div class="col">
-                <h4>NewsLetter<div class="underline"><span></span></div></h4>
+                <h4>Newsletter<div class="underline"><span></span></div></h4>
                 <form>
-                    <i class ="far fa-envelope"></i>
-                    <input type="email" placeholder="Enter email id" required>
+                    <i class="far fa-envelope"></i>
+                    <input type="email" placeholder="Enter email id" required />
                     <button type="submit"><i class="fas fa-arrow-right"></i></button>
                 </form>
                 <div class="social-icons">
-                    <i class="fab fa-facebook-f"></i>
+                    
                     <i class="fab fa-instagram"></i>
                     <i class="fab fa-twitter"></i>
-                    <i class="fab fa-pinterest"></i>
+                    <i class="fab fa-whatsapp"></i>
                 </div>
             </div>
-
-            
-            
-            
-            
-            <!-- Location and Map -->
-            
-            
-            <!-- Quick Links -->
-            
-            
         </div>
+        <hr />
+        <p class="copyright">© Smoke synidate</p>
         
-        <hr>
-        <p class="copyright">Baskin.Robbins</p>
-        <div class="footer-text">
-            <h6>Webiste Crafted By</h6>
-            <h5>Hitzz</h5>
-        </div>
-
     </footer>
-    
-    
 
-    
-    
-    
-    
+    <script>
+  const menuBtn = document.getElementById("menuBtn");
+  const drawer = document.getElementById("drawer");
+  const overlay = document.getElementById("overlay");
 
-</body>
+  // Open drawer
+  menuBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    drawer.classList.add("open");
+    overlay.classList.add("active");
+  });
 
-
-
-</style>
-<script>
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        const messages = document.querySelectorAll('.banner-message');
-        let currentIndex = 0;
-
-        function showNextMessage() {
-            messages[currentIndex].style.display = 'none';
-            currentIndex = (currentIndex + 1) % messages.length;
-            messages[currentIndex].style.display = 'block';
-        }
-
-        messages[currentIndex].style.display = 'block';
-        setInterval(showNextMessage, 8000); // Match the duration with the CSS animation
-    });
-    document.getElementById('navbarDropdown').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default dropdown behavior
-        document.getElementById('drawer').classList.toggle('open');
-        document.getElementById('overlay').style.display = 'block'; // Show overlay
-    });
-    
+  // Close drawer when clicking outside
+  overlay.addEventListener("click", function () {
+    drawer.classList.remove("open");
+    overlay.classList.remove("active");
+  });
 </script>
-<script>
-    const header = document.querySelector('.header');
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 0) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-    document.addEventListener("DOMContentLoaded", () => {
-        const body = document.body;
-        const header = document.querySelector('header');
-        
-        let lastScroll = 0;
-        
-        window.addEventListener("scroll", () => {
-            const currentScroll = window.pageYOffset;
-    
-            if (currentScroll <= 0) {
-                body.classList.remove("scroll-up");
-            } else if (currentScroll > lastScroll && !body.classList.contains("scroll-down")) {
-                if (currentScroll > header.offsetHeight) {
-                    body.classList.remove("scroll-up");
-                    body.classList.add("scroll-down");
-                }
-            } else if (currentScroll < lastScroll && body.classList.contains("scroll-down")) {
-                body.classList.remove("scroll-down");
-                body.classList.add("scroll-up");
-            }
-    
-            lastScroll = currentScroll;
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const messages = document.querySelectorAll('.banner-message');
+            let currentIndex = 0;
+            messages.forEach(msg => msg.style.display = 'none');
+            messages[currentIndex].style.display = 'block';
+            setInterval(() => {
+                messages[currentIndex].style.display = 'none';
+                currentIndex = (currentIndex + 1) % messages.length;
+                messages[currentIndex].style.display = 'block';
+            }, 5000);
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navbar = document.getElementById('navbar');
+
+        hamburger.addEventListener('click', function () {
+            navbar.classList.toggle('show');
+            this.classList.toggle('active');
+        });
+    </script>
+    <script>
+const cartIcon = document.getElementById("cart-icon");
+const cartDrawer = document.getElementById("cart-drawer");
+const closeCart = document.getElementById("close-cart");
+const cartItemsDiv = document.querySelector(".cart-items");
+const cartTotal = document.getElementById("cart-total");
+
+// Open/Close Drawer
+cartIcon.addEventListener("click", () => { cartDrawer.classList.add("open"); loadCart(); });
+closeCart.addEventListener("click", () => { cartDrawer.classList.remove("open"); });
+
+// Load Cart
+function loadCart() {
+    fetch("/cart-items-json/")
+    .then(res => res.json())
+    .then(data => {
+        const cartItemsDiv = document.querySelector(".cart-items");
+        const cartTotal = document.getElementById("cart-total");
+
+        cartItemsDiv.innerHTML = "";
+        cartTotal.innerText = data.total.toFixed(2);
+
+        data.items.forEach(item => {
+            const div = document.createElement("div");
+            div.classList.add("cart-item");
+            div.innerHTML = `
+                <div class="item-info">
+                    <img src="${item.feature_image}" alt="${item.product}" class="cart-item-img">
+                    <div class="item-text">
+                        <strong>${item.product}</strong> (${item.variant})
+                    </div>
+                    <div class="item-subtotal">Subtotal: Rs ${item.subtotal.toFixed(2)}</div>
+                </div>
+                <div class="item-actions">
+                    <label>Quantity:</label>
+                    <input type="number" min="1" value="${item.quantity}" data-id="${item.id}">
+                    <div class="cart-buttons">
+                        <button class="update-qty" data-id="${item.id}">Update</button>
+                        <button class="remove" data-id="${item.id}">Remove</button>
+                    </div>
+                    
+                </div>
+            `;
+            cartItemsDiv.appendChild(div);
+        });
+
+        // Update quantity
+        document.querySelectorAll(".update-qty").forEach(btn => {
+            btn.addEventListener("click", function() {
+                const variantId = this.getAttribute("data-id");
+                const input = document.querySelector(`input[data-id='${variantId}']`);
+                let quantity = input.value;
+                if (quantity < 1) quantity = 1;
+
+                fetch(`/update-cart-ajax/${variantId}/`, {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}",
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `quantity=${quantity}`
+                }).then(() => loadCart());
+            });
+        });
+
+        // Remove item
+        document.querySelectorAll(".remove").forEach(btn => {
+            btn.addEventListener("click", function() {
+                const variantId = this.getAttribute("data-id");
+                fetch(`/remove-from-cart-ajax/${variantId}/`, {
+                    method: "POST",
+                    headers: {"X-CSRFToken": "{{ csrf_token }}"}
+                }).then(() => loadCart());
+            });
         });
     });
-    
+}
 </script>
 <script>
-    const productsGrid = document.querySelector('.products-grid');
-    let isTouching = false;
-    let startX, scrollLeft;
+const hamburger = document.getElementById("hamburger");
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("overlay");
 
-    productsGrid.addEventListener('touchstart', (e) => {
-        isTouching = true;
-        startX = e.touches[0].pageX - productsGrid.offsetLeft;
-        scrollLeft = productsGrid.scrollLeft;
-    });
+hamburger.addEventListener("click", () => {
+    drawer.classList.toggle("open");
+    overlay.classList.toggle("active");
+    hamburger.classList.toggle("active");
+});
 
-    productsGrid.addEventListener('touchend', () => {
-        isTouching = false;
-    });
+// Close drawer when clicking outside
+overlay.addEventListener("click", () => {
+    drawer.classList.remove("open");
+    overlay.classList.remove("active");
+    hamburger.classList.remove("active");
+});
+</script>
 
-    productsGrid.addEventListener('touchmove', (e) => {
-        if (!isTouching) return;
-        e.preventDefault();
-        const x = e.touches[0].pageX - productsGrid.offsetLeft;
-        const walk = (x - startX) * 3; // Scroll speed
-        productsGrid.scrollLeft = scrollLeft - walk;
-    });
-    
-    const hamburger = document.getElementById('hamburger');
-    const navbar = document.getElementById('navbar');
-    const body = document.body;
+<script>
+    // Close Popup when button clicked
+    document.getElementById("close-popup").onclick = function() {
+        document.getElementById("popup-ad").style.display = "none";
+    };
 
-    hamburger.addEventListener('click', function () {
-        navbar.classList.toggle('show');
-        hamburger.classList.toggle('active');
-
-        // Toggle scrolling
-        if (navbar.classList.contains('show')) {
-            header.style.backgroundColor = 'rgba(255, 248, 231, 0.5)';   // Change header color (example: light gray)
-        } else {
-            header.style.backgroundColor = ''; // Reset header color
-        }
-        
-        
-    }); 
-
-
-    // Close navbar when clicking outside
-   
+    // Optional: Auto-hide after 5 seconds
+    // setTimeout(() => {
+    //     document.getElementById("popup-ad").style.display = "none";
+    // }, 5000);
 </script>
 
 
+</body>
 </html>
